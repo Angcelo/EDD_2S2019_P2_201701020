@@ -4,9 +4,9 @@ arbol=Arbo.Arbol()
 
 
 print("funciona")
-arbol.insertarPadre("hola")
-arbol.insertarPadre("adios")
-arbol.insertarPadre("quepasa")
-arbol.insertarPadre("Jaja")
-
+arbol.insertarPadre("mama")
+arbol.insertarPadre("jiso")
+arbol.insertarPadre("padre")
+arbol.insertarPadre("iglu")
+arbol.insertarPadre("kilo")
 arbol.graficar()
