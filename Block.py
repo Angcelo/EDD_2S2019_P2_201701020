@@ -13,6 +13,8 @@ class NodoDoble:
        	self.Data=data
        	self.PHash=previusHash
        	self.Hash=Hash
+       	self.sig=None
+       	self.ant=None
 
 class ListaDoble:
 	"""docstring for ClassName"""
@@ -38,7 +40,17 @@ class ListaDoble:
 			print(hasha)
 			nuevo=NodoDoble(self.indice,time.strftime("%d/%m/%y")+" "+time.strftime("%X"),nombre,data,"0000",hasha)
 			self.primero=nuevo
+			self.primero.sig=ultimo
 			self.ultimo=nuevo
+			self.ultimo.ant=primero
+		else:
+			time_string = time.strftime("%d/%m/%Y;%H:%M"+":00")
+			hashant=ultimo.hasha
+			st = str(self.indice)+time_string+nombre+dataJson+hashant
+			var=str.encode(st)
+			m = hashlib.sha256()
+			m.update(var)
+			hasha=m.hexdigest()
 		pass
 
 	
