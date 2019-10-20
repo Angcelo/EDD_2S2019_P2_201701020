@@ -1,12 +1,5 @@
-import Arbo
+import Block
 
-arbol=Arbo.Arbol()
+bloque=Block.ListaDoble()
 
-
-print("funciona")
-arbol.insertarPadre("mama")
-arbol.insertarPadre("jiso")
-arbol.insertarPadre("padre")
-arbol.insertarPadre("iglu")
-arbol.insertarPadre("kilo")
-arbol.graficar()
+bloque.insertar_final("Estructuras","hola")

@@ -1,12 +1,14 @@
 digraph pila{
 node [shape="record"];
+opera [ label = "{opera|0}"];
 mama [ label = "{mama|-1}"];
-jiso [ label = "{jiso|0}"];
-iglu [ label = "{iglu|0}"];
 kilo [ label = "{kilo|0}"];
-padre [ label = "{padre|0}"];
-mama->jiso;
-jiso->iglu
-jiso->kilo
-mama->padre;
+queso [ label = "{queso|0}"];
+pera [ label = "{pera|0}"];
+Tabla [ label = "{Tabla|0}"];
+opera->mama;
+mama->kilo
+opera->queso;
+queso->pera
+queso->Tabla
 }

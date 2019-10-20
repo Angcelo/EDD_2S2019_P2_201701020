@@ -33,11 +33,13 @@ class Arbol():
                     self.insertar(dato,self.padre.izquierda)
                     if aumentar:
                         self.padre.equilibrio-=1
-                        if self.padre.equilibrio<-1 and self.padre.izquierda.equilibrio<1:
+                        if self.padre.equilibrio<=-2 and self.padre.izquierda.equilibrio<0:
                             print("EqSimpleIzq")
                             temp=self.padre.izquierda
+
                             temp.equilibrio=0
                             self.padre.equilibrio=0
+
                             self.padre.izquierda=temp.derecha
                             temp.derecha=self.padre
                             self.padre=temp
@@ -54,15 +56,19 @@ class Arbol():
                             self.padre.izquierda=temp2.derecha
                             temp2.derecha=self.padre
                             self.padre=temp2
-                            if n>0:
-                                self.padre.equilibrio=1
-                            elif n<0:
-                                self.padre.equilibrio=-1
+
+                            if n==-1:
+                                self.padre.derecha.equilibrio=1
                             else:
-                                self.padre.equilibrio=0
+                                self.padre.derecha.equilibrio=0
                             pass
-                            self.padre.derecha.equilibrio=0
-                            self.padre.izquierda.equilibrio=0
+                            if n==1:
+                                self.padre.izquierda.equilibrio=-1
+                            else:
+                                self.padre.izquierda.equilibrio=0
+                            pass
+                            self.padre.equilibrio=0
+
                             aumentar=False
                         pass
                     elif NodoColocar!=None:
@@ -78,7 +84,8 @@ class Arbol():
                     self.insertar(dato,self.padre.derecha)
                     if aumentar:
                         self.padre.equilibrio+=1
-                        if self.padre.equilibrio>1 and self.padre.derecha.equilibrio>-1:
+                        if self.padre.equilibrio>1 and self.padre.derecha.equilibrio>0:
+                            print("EqSimpleDer")
                             temp=self.padre.derecha
                             temp.equilibrio=0
                             self.padre.equilibrio=0
@@ -88,6 +95,7 @@ class Arbol():
                             aumentar=False
 
                         elif self.padre.equilibrio>1:
+                            print("EqDobleDer")
                             temp1=self.padre.derecha
                             temp2=self.padre.derecha.izquierda
                             n=temp2.equilibrio
@@ -98,19 +106,22 @@ class Arbol():
                             temp2.izquierda=self.padre
                             self.padre=temp2
 
-                            if n>0:
-                                self.padre.equilibrio=1
-                            elif n<0:
-                                self.padre.equilibrio=-1
+                            if n==-1:
+                                self.padre.derecha.equilibrio=1
                             else:
-                                self.padre.equilibrio=0
+                                self.padre.derecha.equilibrio=0
                             pass
-                            self.padre.derecha.equilibrio=0
-                            self.padre.izquierda.equilibrio=0
+                            if n==1:
+                                self.padre.izquierda.equilibrio=-1
+                            else:
+                                self.padre.izquierda.equilibrio=0
+                            pass
+                            self.padre.equilibrio=0
+
                             aumentar=False
                         pass
                     elif NodoColocar!=None:
-                        self.padre.izquierda=NodoColocar
+                        self.padre.derecha=NodoColocar
                         NodoColocar=None
                     pass
                 pass
@@ -134,7 +145,7 @@ class Arbol():
                 self.insertar(dato,nodoA.izquierda)
                 if aumentar:
                     nodoA.equilibrio-=1
-                    if nodoA.equilibrio<-1 and nodoA.izquierda.equilibrio<1:
+                    if nodoA.equilibrio<-1 and nodoA.izquierda.equilibrio<0:
                         print("EqSimpleIzq2")
                         temp=nodoA.izquierda
                         temp.equilibrio=0
@@ -157,16 +168,20 @@ class Arbol():
                         nodoA.izquierda=temp2.derecha
                         temp2.derecha=nodoA
                         nodoA=temp2
-                        NodoColocar=nodoA
-                        if n>0:
-                            nodoA.equilibrio=1
-                        elif n<0:
-                            nodoA.equilibrio=-1
+                        
+                        if n==-1:
+                            nodoA.derecha.equilibrio=1
                         else:
-                            nodoA.equilibrio=0
+                            nodoA.derecha.equilibrio=0
                         pass
-                        nodoA.derecha.equilibrio=0
-                        nodoA.izquierda.equilibrio=0
+                        if n==1:
+                            nodoA.izquierda.equilibrio=-1
+                        else:
+                            nodoA.izquierda.equilibrio=0
+                        pass
+                        nodoA.equilibrio=0
+
+                        NodoColocar=nodoA
                         aumentar=False
                     pass
                 elif NodoColocar!=None:
@@ -187,17 +202,22 @@ class Arbol():
                 self.insertar(dato,nodoA.derecha)
                 if aumentar:
                     nodoA.equilibrio+=1
-                    if nodoA.equilibrio>1 and nodoA.derecha.equilibrio>-1:
+                    if nodoA.equilibrio>1 and nodoA.derecha.equilibrio>0:
+                        print("EqSimpleDer2")
                         temp=nodoA.derecha
+
                         temp.equilibrio=0
                         nodoA.equilibrio=0
+
                         nodoA.derecha=temp.izquierda
                         temp.izquierda=nodoA
                         nodoA=temp
+
                         NodoColocar=nodoA
                         aumentar=False
 
                     elif nodoA.equilibrio>1:
+                        print("EqDobleDer2")
                         temp1=nodoA.derecha
                         temp2=nodoA.derecha.izquierda
                         n=temp2.equilibrio
@@ -208,20 +228,23 @@ class Arbol():
                         temp2.izquierda=nodoA
                         nodoA=temp2
 
-                        if n>0:
-                            nodoA.equilibrio=1
-                        elif n<0:
-                            nodoA.equilibrio=-1
+                        if n==-1:
+                            nodoA.derecha.equilibrio=1
                         else:
-                            nodoA.equilibrio=0
+                            nodoA.derecha.equilibrio=0
                         pass
-                        nodoA.derecha.equilibrio=0
-                        nodoA.izquierda.equilibrio=0
+                        if n==1:
+                            nodoA.izquierda.equilibrio=-1
+                        else:
+                            nodoA.izquierda.equilibrio=0
+                        pass
+                        nodoA.equilibrio=0
+
                         NodoColocar=nodoA
                         aumentar=False
                     pass
                 elif NodoColocar!=None:
-                    nodoA.izquierda=NodoColocar
+                    nodoA.derecha=NodoColocar
                     NodoColocar=None
                 pass
             pass
