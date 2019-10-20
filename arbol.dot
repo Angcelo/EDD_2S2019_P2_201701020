@@ -1,0 +1,10 @@
+digraph pila{
+node [shape="record"];
+hola [ label = "{hola|1}"];
+adios [ label = "{adios|0}"];
+quepasa [ label = "{quepasa|-1}"];
+Jaja [ label = "{Jaja|0}"];
+hola->adios;
+hola->quepasa;
+quepasa->Jaja
+}

@@ -10,21 +10,69 @@ class Nodo:
 class Arbol():
 
     def __init__(self):
-        self.padre=None  
+        self.padre=None   
 
-    def comprobar(self,dato):
-        return dato=="+" or dato=="-" or dato=="*" or dato=="/"    
+    def comprobarpadre(self):
+        return self.padre!=None
+
+    def insertarPadre(self,dato):
+        if self.padre==None:
+            self.padre=Nodo(dato)
+        else: 
+            if self.comparar(self.padre.dato) > self.comparar(dato):
+                if self.padre.izquierda==None:
+                    self.padre.izquierda=Nodo(dato)
+                    self.padre.equilibrio-=1
+                else:
+                    if self.insertar(dato,self.padre.izquierda):
+                        self.padre.equilibrio-=1
+                    pass
+                pass
+            else:
+                if self.padre.derecha==None:
+                    self.padre.derecha=Nodo(dato)
+                    self.padre.equilibrio+=1
+                else:
+                    if self.insertar(dato,self.padre.derecha):
+                        self.padre.equilibrio+=1
+                    pass
+                pass
+            pass
+        pass
+
 
     def insertar(self,dato,nodoA):
-        nuevo =Nodo(dato)
-        if nodoA==None:
-            nodoA=nuevo
-        else 
-            if self.comparar(padre.dato[0].lower())<self.comparar(nuevo.dato[0].lower()):
-                self.insertar(dato,nodoA.izquierda)
-            else
-                self.insertar(dato,nodoA.derecha)
+        if self.comparar(nodoA.dato) > self.comparar(dato):
+            if nodoA.izquierda==None:
+                nodoA.izquierda=Nodo(dato)
+                nodoA.equilibrio-=1
+                if nodoA.derecha==None:
+                    return True
+                pass
+                return False
+            else:
+                if insertar(dato,nodoA.izquierda):
+                    nodoA.equilibrio-=1
+                    return True
+                pass
+                return False
             pass
+        else:
+            if nodoA.derecha==None:
+                nodoA.derecha=Nodo(dato)
+                nodoA.equilibrio+=1
+                if nodoA.izquierda==None:
+                    return True
+                pass
+                return False
+            else: 
+                if insertar(dato,nodoA.derecha):
+                    nodoA.equilibrio-=1
+                    return True
+                pass
+                return False
+            pass
+        pass
 
     def comparar(self,dato):
         letra=dato[0].lower()
@@ -66,5 +114,47 @@ class Arbol():
             'y': 34,
             'z': 35,
         }
-        print switcher.get(letra,0)
         return switcher.get(letra,0)
+
+
+    def graficar1(self,nodo,f):
+        if nodo.izquierda!=None:
+            f.write(nodo.dato+"->"+nodo.izquierda.dato+"\n")
+            self.graficar1(nodo.izquierda,f)
+            pass
+        if nodo.derecha!=None:
+            f.write(nodo.dato+"->"+nodo.derecha.dato+"\n")
+            self.graficar1(nodo.derecha,f) 
+            pass
+
+    def graficar2(self,nodo,f):
+        f.write(nodo.dato+" [ label = \"{"+nodo.dato+"|"+str(nodo.equilibrio)+"}\"];\n")
+        if nodo.izquierda!=None:
+            self.graficar2(nodo.izquierda,f)
+            pass
+        if nodo.derecha!=None:
+            self.graficar2(nodo.derecha,f)
+            pass
+
+    def graficar(self):
+        f=open("arbol.dot","w")
+        f.write("digraph pila{\n")
+        f.write("node [shape=\"record\"];\n")
+        f.write(self.padre.dato+" [ label = \"{"+self.padre.dato+"|"+str(self.padre.equilibrio)+"}\"];\n")
+        if self.padre.izquierda!=None:
+            self.graficar2(self.padre.izquierda,f)
+            pass
+        if self.padre.derecha!=None:
+            self.graficar2(self.padre.derecha,f)
+            pass
+        if self.padre.izquierda!=None:
+            f.write(self.padre.dato+"->"+self.padre.izquierda.dato+";\n")
+            self.graficar1(self.padre.izquierda,f)
+            pass
+        if self.padre.derecha!=None:
+            f.write(self.padre.dato+"->"+self.padre.derecha.dato+";\n")
+            self.graficar1(self.padre.derecha,f)
+            pass
+        f.write("}")
+        f.close()
+        os.system("dot -Tjpg arbol.dot -o imagena.jpg")
